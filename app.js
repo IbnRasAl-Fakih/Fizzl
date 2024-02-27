@@ -4,7 +4,6 @@ const path = require('path');
 require('dotenv').config();
 const crypto = require('crypto');
 const session = require("express-session");
-const MemoryStore = require('memorystore')(session)
 const app = express();
 const PORT = process.env.PORT || 3000;
 const http = require('http');
@@ -28,10 +27,8 @@ mongoose.connect(process.env.MONGO_URL).then( () => {
 
 app.use(session({
   secret: crypto.randomBytes(64).toString('hex'),
-  store: new MemoryStore({
-    checkPeriod: 86400000
-  }),
   resave: false,
+  saveUninitialized: false,
   cookie: { maxAge: 86400000 },
 }));
 
