@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fizzl</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script src="https://kit.fontawesome.com/a41b8ba207.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/CSS/guideSection.css">
+    <link rel="stylesheet" href="/CSS/post.css">
+</head>
+<body>
+    <div id="guideSection" class="position-relative">
+        <p class="fs-2 my-5 ms-4"><em>Fizzl</em></p>
+        <button onclick="users()" class="mx-auto">
+            <i class="fa-solid fa-users fa-lg"></i>
+            <p>Users</p>
+        </button>
+        <button onclick="post()" class="mx-auto">
+            <i class="fa-regular fa-file fa-lg"></i>
+            <p>Post</p>
+        </button>
+        <button onclick="logout()" class="mx-auto">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+            <p>Logout</p>
+        </button>
+        <div class="position-absolute bottom-0 w-100">
+            <p class="mx-auto text-center my-3">Made by Eletai Rasul</p>
+        </div>
+    </div>
+    <div id="post">
+        <button class="button" onclick="openModal()">Add post</button>
+        <% for (let i = 0; i < posts.length; i++) { %>
+            <div class="d-flex justify-content-center my-5">
+                <div class="block">
+                    <div class="carousel-container">
+                        <div class="carousel-images">
+                            <img src="/uploads/<%= posts[i].images[0] %>" class="carousel-image" alt="img">
+                            <img src="/uploads/<%= posts[i].images[1] %>" class="carousel-image" alt="img">
+                            <img src="/uploads/<%= posts[i].images[2] %>" class="carousel-image" alt="img">
+                        </div>
+                        <div class="carousel-description">
+                            <p><%= posts[i].description %></p>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button onclick="deletePost('<%- posts[i]._id %>')" class="bg-danger p-1 button"><i class="fa-solid fa-trash fa-lg"></i></button>
+                            <button onclick="editPost('<%- posts[i]._id %>')" class="bg-success p-1 button"><i class="fa-solid fa-pen-to-square fa-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close text-light fs-5" id="closeModalBtn">&times;</span>
+            <div class="d-flex justify-content-center">
+                <div class="postBlock">
+                    <form action="/admin/post" method="post" enctype="multipart/form-data">
+                        <label aria-hidden="true">New Post</label>
+                        <input type="file" name="image1" accept="" required="">
+                        <input type="file" name="image2" accept="" required="">
+                        <input type="file" name="image3" accept="" required="">
+                        <input type="text" name="description" placeholder="Description" required="">
+                        <button class="button" type="submit">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myUpdateModal" class="modal">
+        <div class="modal-content">
+            <span class="close text-light fs-5" id="closeUpdateModalBtn">&times;</span>
+            <div class="d-flex justify-content-center">
+                <div class="postBlock">
+                    <form action="/admin/post/:id" method="post" enctype="multipart/form-data" id="updateForm">
+                        <label aria-hidden="true">Update Post</label>
+                        <input type="file" name="image1" accept="" required="">
+                        <input type="file" name="image2" accept="" required="">
+                        <input type="file" name="image3" accept="" required="">
+                        <input type="text" name="description" placeholder="Description" required="">
+                        <button class="button" type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/JS/location.js"></script>
+    <script src="/JS/post.js"></script>
+    <script src="/JS/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
