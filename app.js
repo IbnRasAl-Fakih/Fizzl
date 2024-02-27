@@ -35,7 +35,7 @@ app.use(session({
 
 let activeUsers = [];
 
-io.on('connection', (socket) => {
+io.on('https://fizzl-sand.vercel.app', (socket) => {
   console.log('Пользователь подключен');
 
   socket.on('chat message', async (msg, userId, chatId) => {
