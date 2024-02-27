@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const path = require('path');
 require('dotenv').config();
 const crypto = require('crypto');
-const session = require("express-session");
+const session = require("cookie-session");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const http = require('http');
@@ -18,6 +18,7 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set('views', path.join(process.cwd(), 'views'));
 app.use(express.static('public'));
+app.set('trust proxy', 1);
 
 mongoose.connect(process.env.MONGO_URL).then( () => {
   console.log("Connected to db");
