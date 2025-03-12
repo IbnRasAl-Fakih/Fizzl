@@ -12,7 +12,7 @@ Install the required dependencies:
 npm install
 
 Start the local development server:
-npm node app.js
+node app.js
 
 This will launch the application on http://localhost:3000.
 
